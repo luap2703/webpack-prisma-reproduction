@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["extendedWhereUnique", "filteredRelationCount", "fieldReference", "clientExtensions", "fullTextSearch", "fullTextIndex"]
+  binaryTargets   = env("PRISMA_BINARY_TARGET")
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id            String  @id @default(uuid())
+  given_name         String?
+  family_name        String?
+  email              String  @unique
+  picture            String?
+  phone              String?
+  phone_country_code String?
+
+  @@unique([phone_country_code, phone])
+}

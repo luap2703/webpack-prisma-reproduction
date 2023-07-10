@@ -1,0 +1,26 @@
+{ "Records": [
+{
+  "body": {
+  "notificationVersion": "2020-09-04",
+  "notificationType": "REPORT_PROCESSING_FINISHED",
+  "payloadVersion": "1.0",
+  "eventTime": "2023-07-09T09:41:51.796Z",
+  "payload": {
+    "reportProcessingFinishedNotification": {
+      "sellerId": "A2EU9GVEPHHFQW",
+      "reportId": "273965019547",
+      "reportType": "GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA",
+      "processingStatus": "DONE",
+      "reportDocumentId": "amzn1.spdoc.1.4.eu.42d64d11-a11e-4906-9921-cd937a12819b.T6CYME40OBYN5.2651"
+    }
+  },
+  "notificationMetadata": {
+    "applicationId": "amzn1.sp.solution.7e16af09-3855-40a3-bdb1-cdac2729f0ea",
+    "subscriptionId": "609a40fe-b316-4172-8bf4-daff4a43f972",
+    "publishTime": "2023-07-09T09:41:51.842Z",
+    "notificationId": "485b8577-e5b3-4a8c-bb3e-3cdfacae514a"
+  }
+}
+}
+]
+}

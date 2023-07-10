@@ -1,0 +1,10 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "Packaged externals for lambda",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "@prisma/client": "^4.15.0"
+  }
+}
