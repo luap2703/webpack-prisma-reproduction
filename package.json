@@ -13,7 +13,8 @@
     "generate:production": "dotenv -e .env.production -- npx prisma generate",
     "generate:development": "dotenv -e .env.development -- npx prisma generate",
     "go": "NODE_ENV=development sls invoke local --function receiveSpApiMessages --path ./example.json",
-    "go2": "NODE_ENV=development sls invoke local --function updateAllUserJtlStocks --verbose"
+    "go2": "NODE_ENV=development sls invoke local --function updateAllUserJtlStocks --verbose",
+    "git": "git add -A :/ && git commit -m \"update\" && git push origin main"
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
