@@ -71,10 +71,10 @@
         }
       }
     },
-    "ReceiveSpApiMessagesLogGroup": {
+    "TestFunctionLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/lambda-dev-receiveSpApiMessages"
+        "LogGroupName": "/aws/lambda/lambda-dev-testFunction"
       }
     },
     "IamRoleLambdaExecution": {
@@ -144,17 +144,6 @@
                   "Resource": [
                     "*"
                   ]
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "sqs:ReceiveMessage",
-                    "sqs:DeleteMessage",
-                    "sqs:GetQueueAttributes"
-                  ],
-                  "Resource": [
-                    "arn:aws:sqs:eu-west-1:832483516087:EU-WEST-1-QUEUE"
-                  ]
                 }
               ]
             }
@@ -176,18 +165,18 @@
         }
       }
     },
-    "ReceiveSpApiMessagesLambdaFunction": {
+    "TestFunctionLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/lambda/dev/1689022229872-2023-07-10T20:50:29.872Z/receiveSpApiMessages.zip"
+          "S3Key": "serverless/lambda/dev/1689073929732-2023-07-11T11:12:09.732Z/testFunction.zip"
         },
-        "Handler": "src/functions/receiveSpApiMessages.handler",
+        "Handler": "src/functions/testFunction.handler",
         "Runtime": "nodejs18.x",
-        "FunctionName": "lambda-dev-receiveSpApiMessages",
+        "FunctionName": "lambda-dev-testFunction",
         "MemorySize": 512,
         "Timeout": 240,
         "TracingConfig": {
@@ -197,7 +186,8 @@
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
             "NODE_OPTIONS": "--enable-source-maps --stack-trace-limit=1000",
-            "PRISMA_BINARY_TARGET": "[\"rhel-openssl-1.0.x\"]"
+            "PRISMA_BINARY_TARGET": "[\"rhel-openssl-1.0.x\"]",
+            "DATABASE_URL": "mysql://admin:VJ0hjIFWQFzRsViPaGaAxvtEh3sJK7AgNdL3EFwjX@database-1.chp7pgrtixjf.eu-central-1.rds.amazonaws.com:3306/database-1"
           }
         },
         "Role": {
@@ -208,34 +198,17 @@
         }
       },
       "DependsOn": [
-        "ReceiveSpApiMessagesLogGroup"
+        "TestFunctionLogGroup"
       ]
     },
-    "ReceiveSpApiMessagesLambdaVersionBZANrtmsLykZl5cSes7mwXsjnmByxc1oT6w1mTMY0": {
+    "TestFunctionLambdaVersionyFXhC0zEILrj3di5YMSbSQihJDCZp89LxZdPfc0D8Lw": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "ReceiveSpApiMessagesLambdaFunction"
+          "Ref": "TestFunctionLambdaFunction"
         },
-        "CodeSha256": "pQU5csvdBX3jJlvhYU7tR5M3vopH+dV/7WvUeUc5Acw="
-      }
-    },
-    "ReceiveSpApiMessagesEventSourceMappingSQSEUWEST1QUEUE": {
-      "Type": "AWS::Lambda::EventSourceMapping",
-      "DependsOn": [
-        "IamRoleLambdaExecution"
-      ],
-      "Properties": {
-        "BatchSize": 1,
-        "EventSourceArn": "arn:aws:sqs:eu-west-1:832483516087:EU-WEST-1-QUEUE",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "ReceiveSpApiMessagesLambdaFunction",
-            "Arn"
-          ]
-        },
-        "Enabled": true
+        "CodeSha256": "SeuR/s58UlqYPoAdCGnFG7SoZDauhU7oxmR51EQmxY4="
       }
     }
   },
@@ -248,13 +221,13 @@
         "Name": "sls-lambda-dev-ServerlessDeploymentBucketName"
       }
     },
-    "ReceiveSpApiMessagesLambdaFunctionQualifiedArn": {
+    "TestFunctionLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ReceiveSpApiMessagesLambdaVersionBZANrtmsLykZl5cSes7mwXsjnmByxc1oT6w1mTMY0"
+        "Ref": "TestFunctionLambdaVersionyFXhC0zEILrj3di5YMSbSQihJDCZp89LxZdPfc0D8Lw"
       },
       "Export": {
-        "Name": "sls-lambda-dev-ReceiveSpApiMessagesLambdaFunctionQualifiedArn"
+        "Name": "sls-lambda-dev-TestFunctionLambdaFunctionQualifiedArn"
       }
     }
   }

@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "CommonJS",
@@ -34,10 +33,4 @@
     "_warmup/**/*",
     ".vscode/**/*"
   ],
-  "ts-node": {
-    "require": ["tsconfig-paths/register"],
-    "compilerOptions": {
-      "module": "CommonJS",
-    }
-  }
 }

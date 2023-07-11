@@ -9,7 +9,6 @@ const serverlessConfiguration: AWS = {
     "serverless-webpack",
     "serverless-webpack-prisma",
 
-    
     //"serverless-offline",
   ],
   provider: {
@@ -30,18 +29,9 @@ const serverlessConfiguration: AWS = {
   },
   // import the function via paths
   functions: {
-    receiveSpApiMessages: {
-      handler: "src/functions/receiveSpApiMessages.handler",
+    testFunction: {
+      handler: "src/functions/testFunction.handler",
       // Receive SQS messages
-      events: [
-        {
-          sqs: {
-            arn: "arn:aws:sqs:eu-west-1:832483516087:EU-WEST-1-QUEUE",
-            batchSize: 1,
-            enabled: true,
-          },
-        },
-      ],
       timeout: 240,
       memorySize: 512,
       tracing: true,
@@ -49,50 +39,28 @@ const serverlessConfiguration: AWS = {
   },
   package: {
     individually: true,
-    /*patterns: [
+    patterns: [
+      "node_modules/prisma/**"//libquery_engine*"
+      /*
       "node_modules/.prisma/client/*",
       ...(process.env.NODE_ENV === "production"
         ? ["!node_modules/.prisma/client/libquery_engine-*"]
         : []),
       "node_modules/.prisma/client/libquery_engine-rhel-*",
       "!node_modules/prisma/libquery_engine-*",
-      "!node_modules/@prisma/engines/**",
-    ],*/
+      "!node_modules/@prisma/engines/**",*/
+    ],
   },
   custom: {
-    /*esbuild: {
-      bundle: true,
-      minify: false,
-      sourcemap: true,
-      exclude: ["aws-sdk"],
-      //target: "esnext",
-      target: "node18",
-      //outputFileExtension: ".mjs",
-      //format: "esm",
-      //define: { "require.resolve": undefined },
-      platform: "node",
-      concurrency: 1,
-    },*/
-    /*
+    prisma: {
+      installDeps: false,
+    },
 
-      webpack:
-    webpackConfig: ./webpack.config.ts
-    includeModules: true
-    packager: 'yarn' # Packager that will be used to package your external modules
-    */
     webpack: {
       packager: "npm",
       webpackConfig: "./webpack.config.js",
       includeModules: {
-        forceExclude: [
-          "aws-sdk",
-          "@aws-sdk/client-lambda",
-          "@aws-sdk/client-s3",
-          "@aws-sdk/s3-request-presigner",
-          "@aws-sdk",
-          "@aws-sdk/**/*",
-        ],
-        //@aws-sdk/client-s3
+        forceExclude: ["aws-sdk"],
       },
     },
 

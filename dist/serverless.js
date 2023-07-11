@@ -23,55 +23,28 @@ const serverlessConfiguration = {
         profile: "Serverless_Account",
     },
     functions: {
-        receiveSpApiMessages: {
-            handler: "src/functions/receiveSpApiMessages.handler",
-            events: [
-                {
-                    sqs: {
-                        arn: "arn:aws:sqs:eu-west-1:832483516087:EU-WEST-1-QUEUE",
-                        batchSize: 1,
-                        enabled: true,
-                    },
-                },
-            ],
+        testFunction: {
+            handler: "src/functions/testFunction.handler",
             timeout: 240,
             memorySize: 512,
-            tracing: true,
-        },
-        updateAllUserJtlStocks: {
-            handler: "src/functions/updateAllUserJtlStocks.handler",
-            timeout: 15,
-            tracing: true,
-            events: [
-                {
-                    schedule: {
-                        rate: ["cron(0/15 * * * ? *)"],
-                    },
-                },
-            ],
-        },
-        updateUserJtlStocks: {
-            handler: "src/functions/updateUserJtlStocks.handler",
-            timeout: 12,
             tracing: true,
         },
     },
     package: {
         individually: true,
+        patterns: [
+            "node_modules/prisma/**"
+        ],
     },
     custom: {
+        prisma: {
+            installDeps: false,
+        },
         webpack: {
             packager: "npm",
             webpackConfig: "./webpack.config.js",
             includeModules: {
-                forceExclude: [
-                    "aws-sdk",
-                    "@aws-sdk/client-lambda",
-                    "@aws-sdk/client-s3",
-                    "@aws-sdk/s3-request-presigner",
-                    "@aws-sdk",
-                    "@aws-sdk/**/*",
-                ],
+                forceExclude: ["aws-sdk"],
             },
         },
         prismaEngine: {
